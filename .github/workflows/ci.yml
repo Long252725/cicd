@@ -23,15 +23,15 @@ jobs:
 
   # TẦNG 2: KIỂM THỬ CHỨC NĂNG (UNIT TEST)
   unit-test:
-    name: Kiểm Thử Logic (Vitest)
+    name: 🧪 Kiểm Thử Logic (Vitest)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - name: Cài đặt toàn bộ thư viện (bao gồm cả devDependencies)
-        run: npm install --include=dev  
+      - name: Cài đặt thư viện (Dùng npm ci để tải cả vitest)
+        run: npm ci
       - name: Chạy Unit Test
         run: npm test
 
