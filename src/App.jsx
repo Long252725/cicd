@@ -24,7 +24,6 @@ export default function App() {
         <div className="flex justify-between items-center bg-blue-50 p-4 rounded-lg border border-blue-100">
           <span className="font-semibold text-blue-800">Tổng thanh toán:</span>
           <span className="font-bold text-xl text-blue-600">
-            {/* Gọi hàm tính toán ở đây */}
             {calculateTotal(price, shippingFee).toLocaleString()} VNĐ
           </span>
         </div>
