@@ -1,0 +1,38 @@
+name: 🚀 Real DevSecOps Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # TẦNG 1: KIỂM THỬ CHỨC NĂNG (Sẽ báo XANH 🟩)
+  unit-test:
+    name: 🧪 Kiểm Thử Logic (Vitest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Cài đặt thư viện
+        run: npm install
+      - name: Chạy Unit Test
+        run: npm test
+        # Bước này sẽ XANH vì 20k + 30k đúng bằng 50k. Logic hoàn hảo!
+
+  # TẦNG 2: QUÉT BẢO MẬT (Sẽ báo ĐỎ 🟥 và đánh sập PR)
+  security-scan:
+    name: 🕵️ Quét Lộ Lọt Mật Khẩu (Gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Bắt buộc phải có để Gitleaks quét toàn bộ lịch sử commit
+          
+      - name: Chạy Gitleaks Scan thực tế
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # Bước này sẽ THẤT BẠI NGAY LẬP TỨC vì nó sẽ đọc được file src/config/database.js
