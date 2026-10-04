@@ -2,9 +2,9 @@ name: 🚀 Enterprise DevSecOps Pipeline
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
   # TẦNG 1: QUÉT MẬT KHẨU (SECRET SCANNING)
