@@ -30,8 +30,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - name: Cài đặt thư viện
-        run: npm install
+      - name: Cài đặt toàn bộ thư viện (bao gồm cả devDependencies)
+        run: npm install --include=dev  
       - name: Chạy Unit Test
         run: npm test
 
