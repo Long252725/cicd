@@ -1,4 +1,4 @@
-name: 🚀 Enterprise DevSecOps Pipeline
+name: Enterprise DevSecOps Pipeline
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  # TẦNG 1: QUÉT MẬT KHẨU (SECRET SCANNING)
+  # TẦNG 1: QUÉT MẬT KHẨU
   security-scan:
     name: Quét Lỗ Hổng Mật Khẩu 
     runs-on: ubuntu-latest
@@ -23,21 +23,21 @@ jobs:
 
   # TẦNG 2: KIỂM THỬ CHỨC NĂNG (UNIT TEST)
   unit-test:
-    name: 🧪 Kiểm Thử Logic (Vitest)
+    name: Kiểm Thử Logic (Vitest)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: ''
-      - name: Cài đặt thư viện (Dùng npm ci để tải cả vitest)
+      - name: Cài đặt thư viện
         run: npm ci
       - name: Chạy Unit Test
         run: npm test
 
   # TẦNG 3: QUÉT LỖ HỔNG THƯ VIỆN (SCA)
   dependency-audit:
-    name: NPM Audit (Lỗ hổng thư viện)
+    name: NPM Audit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -45,7 +45,7 @@ jobs:
 
   # TẦNG 4: QUÉT MÃ NGUỒN TĨNH (SAST) - CODEQL
   sast-codeql:
-    name: CodeQL (Phân Tích Cú Pháp)
+    name: CodeQL
     runs-on: ubuntu-latest
     permissions:
       security-events: write
@@ -57,19 +57,3 @@ jobs:
           languages: javascript
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
-
-  # TẦNG 5 & 6: BẢO MẬT HẠ TẦNG (DAST & CONTAINER)
-  # container-security:
-  #   name: 🐳 Trivy (Quét Lỗ Hổng Docker)
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Build an image from Dockerfile
-  #       run: docker build -t my-payment-service:${{ github.sha }} .
-  #     - name: Run Trivy vulnerability scanner
-  #       uses: aquasecurity/trivy-action@master
-  #       with:
-  #         image-ref: 'my-payment-service:${{ github.sha }}'
-  #         format: 'table'
-  #         exit-code: '1' # Đánh sập pipeline nếu phát hiện lỗ hổng OS/Thư viện
-  #         severity: 'CRITICAL,HIGH'
