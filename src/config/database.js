@@ -1,7 +1,6 @@
 export const dbConfig = {
     host: "prod-cluster.mongodb.net",
     user: "admin_super",
-    password: "SuperSecretPassword123!@", 
-    apiKey: "AKIAIOSFODNN7EXAMPLE",
+    password: process.env.PASSWORD, 
+    apiKey: process.env.APIKEY
 };
-export const LEAKED_TOKEN = "ghp_1234567890abcdefghijklmnopqrstuvwx"
