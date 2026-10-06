@@ -9,7 +9,7 @@ on:
 jobs:
   # TẦNG 1: QUÉT MẬT KHẨU
   security-scan:
-    name: Quét Lỗ Hổng Mật Khẩu 
+    name: Gitleaks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,7 +23,7 @@ jobs:
 
   # TẦNG 2: KIỂM THỬ CHỨC NĂNG (UNIT TEST)
   unit-test:
-    name: Kiểm Thử Logic (Vitest)
+    name: Vitest
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
